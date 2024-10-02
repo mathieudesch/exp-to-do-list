@@ -1,6 +1,6 @@
-# EXP To-Do List App
+# EXP To-Do List
 
-A web-based productivity application that turns daily tasks into rewarding quests, inspired by video game mechanics to boost motivation and task completion. Can be run in a web browser or as a desktop application using Electron.
+A TypeScript-based web application that gamifies your to-do list, turning daily tasks into rewarding quests to boost motivation and productivity. Can be run in a web browser or as a desktop application using Electron.
 
 ## Motivation
 
@@ -25,12 +25,12 @@ This project was born out of a personal need to balance productivity with my gam
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/gamified-todo-list.git
+   git clone https://github.com/yourusername/exp-to-do-list.git
    ```
 
 2. Navigate to the project directory:
    ```
-   cd gamified-todo-list
+   cd exp-to-do-list
    ```
 
 3. Install dependencies:
@@ -51,6 +51,10 @@ This project was born out of a personal need to balance productivity with my gam
 2. Complete tasks by checking them off
 3. Track your XP growth and level progression
 4. Use the leveling system as motivation to complete more tasks
+
+## Project Structure
+
+The main component of this application is located in the file `exp-to-do-list.tsx`. This TypeScript file contains the core logic and UI for the EXP To-Do List.
 
 ## Running as a Desktop Application with Electron
 
@@ -118,7 +122,7 @@ To run the app as a desktop application using Electron, follow these additional 
      },
      "build": {
        "extends": null,
-       "appId": "com.example.gamified-todo-list",
+       "appId": "com.example.exp-to-do-list",
        "files": [
          "dist/**/*",
          "build/**/*",
@@ -153,6 +157,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-- React for the frontend framework
+- React and TypeScript for the frontend framework
 - shadcn/ui for UI components
 - Electron for desktop app packaging
