@@ -1,6 +1,6 @@
 # EXP To-Do List App
 
-A productivity application that turns daily tasks into rewarding quests, inspired by video game mechanics to boost motivation and task completion.
+A web-based productivity application that turns daily tasks into rewarding quests, inspired by video game mechanics to boost motivation and task completion. Can be run in a web browser or as a desktop application using Electron.
 
 ## Motivation
 
@@ -45,28 +45,103 @@ This project was born out of a personal need to balance productivity with my gam
 
 5. Open your browser and visit `http://localhost:3000`
 
-### Desktop Application Build
-
-To create a standalone desktop application:
-
-1. Build the React app:
-   ```
-   npm run react-build
-   ```
-
-2. Package with Electron:
-   ```
-   npm run electron-build
-   ```
-
-The packaged application will be available in the `dist` folder.
-
 ## Usage
 
 1. Add a new task by entering a title, description, and selecting a difficulty level
 2. Complete tasks by checking them off
 3. Track your XP growth and level progression
 4. Use the leveling system as motivation to complete more tasks
+
+## Running as a Desktop Application with Electron
+
+To run the app as a desktop application using Electron, follow these additional steps:
+
+1. Install Electron and related dependencies:
+   ```
+   npm install --save-dev electron electron-builder concurrently wait-on cross-env
+   ```
+
+2. Create a new file `public/electron.js` with the following content:
+   ```javascript
+   const { app, BrowserWindow } = require('electron');
+   const path = require('path');
+   const isDev = require('electron-is-dev');
+
+   function createWindow() {
+     const win = new BrowserWindow({
+       width: 800,
+       height: 600,
+       webPreferences: {
+         nodeIntegration: true,
+       },
+     });
+
+     win.loadURL(
+       isDev
+         ? 'http://localhost:3000'
+         : `file://${path.join(__dirname, '../build/index.html')}`
+     );
+
+     if (isDev) {
+       win.webContents.openDevTools({ mode: 'detach' });
+     }
+   }
+
+   app.whenReady().then(createWindow);
+
+   app.on('window-all-closed', () => {
+     if (process.platform !== 'darwin') {
+       app.quit();
+     }
+   });
+
+   app.on('activate', () => {
+     if (BrowserWindow.getAllWindows().length === 0) {
+       createWindow();
+     }
+   });
+   ```
+
+3. Update your `package.json` to include Electron-related scripts and configuration:
+   ```json
+   {
+     "main": "public/electron.js",
+     "homepage": "./",
+     "scripts": {
+       "react-start": "react-scripts start",
+       "react-build": "react-scripts build",
+       "react-test": "react-scripts test",
+       "react-eject": "react-scripts eject",
+       "electron-build": "electron-builder",
+       "build": "npm run react-build && npm run electron-build",
+       "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\""
+     },
+     "build": {
+       "extends": null,
+       "appId": "com.example.gamified-todo-list",
+       "files": [
+         "dist/**/*",
+         "build/**/*",
+         "node_modules/**/*",
+         "package.json"
+       ],
+       "directories": {
+         "buildResources": "assets"
+       }
+     }
+   }
+   ```
+
+4. To run the Electron app in development mode:
+   ```
+   npm run start
+   ```
+
+5. To build the standalone desktop app:
+   ```
+   npm run build
+   ```
+   This will create installable files for your operating system in the `dist` folder.
 
 ## Contributing
 
@@ -79,5 +154,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 - React for the frontend framework
-- Electron for desktop app packaging
 - shadcn/ui for UI components
+- Electron for desktop app packaging
