@@ -16,7 +16,7 @@ This project was born out of a personal need to balance productivity with my gam
 
 ## Application Preview
 
-![EXP To-Do List Application Screenshot](.exp-to-do-list/screenshot.png)
+![EXP To-Do List Application Screenshot](./exp-to-do-list/screenshot.png)
 
 ## Getting Started
 
