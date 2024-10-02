@@ -14,6 +14,10 @@ This project was born out of a personal need to balance productivity with my gam
 - **Dynamic Rewards**: XP rewards adjust based on your current level
 - **Task Organization**: Sort tasks into Active and Completed categories
 
+## Application Preview
+
+![EXP To-Do List Application Screenshot](.screenshot.png)
+
 ## Getting Started
 
 ### Prerequisites
